@@ -107,8 +107,10 @@ $app->post('/loginConductor',function (){
     $user  =$_REQUEST['usuario'];
     $pass  =$_REQUEST['password'];
 
+    // echo $user . $pass;
+
     global $db;
-        $q     = "SELECT * FROM Conductor WHERE con_id = '$user'";
+        $q     = "SELECT * FROM Conductor WHERE con_id = '$user' AND con_nlicencia = '$pass'";
         $datos = $db->get_results($q);
         // if ($datos < 1) {
         //     $datos = array('mensaje' =>  'Login incorrecto');
