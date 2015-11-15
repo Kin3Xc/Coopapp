@@ -1,0 +1,19 @@
+<ion-view view-title="Notificaciones" left-buttons="leftButtons" right-buttons="rightButtons">
+  <ion-header-bar class="bar-dark">
+    <button class="button icon ion-navicon" ng-click="myGoBack()"></button>
+    <h1 class="title title-center" >NOtificaciones</h1>
+  </ion-header-bar>
+  <ion-content ng-init="getAlumnos()">
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="">
+        <h2>La ruta ha llegado</h2>
+        <p>Por favor salir que la ruta esta cerca de su pocisión</p>
+      </ion-item>
+
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="">
+        <h2>Inico de clases</h2>
+        <p>Las clases ha iniciado</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

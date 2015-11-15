@@ -20,6 +20,22 @@ angular.module('coopapp', ['ionic','coopapp.controllers'])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+  .state('app', {
+    url: '/app',
+    abstract: true,
+    templateUrl: 'templates/menu.html',
+    controller: 'AppCtrl'
+  })
+
+  .state('app.home', {
+    url: '/home',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/home.html',
+        controller: 'HomeCtrl'
+      }
+    }
+  })
 
   .state('login',{ //Nombre del estado
     url: '/login', //URL para navegar al estado
