@@ -35,7 +35,12 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 
 		$http.post('https://ikarotech.com/cooptranslibre2/api/loginConductor', login)
 			.success(function(data){
-				alert(data);
+				console.log(data);
+				if (data != null) {
+					$location.url("/home");
+				}else{
+					alert('Error en el inicio de sesión')
+				}
 			})
 			.error(function(err){
 				alert('Error: ' + err);
