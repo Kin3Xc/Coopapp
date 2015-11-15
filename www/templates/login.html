@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view view-title="Bienvenidos" align-title="center" class="Login">
 <div class="row col col-100">
 	  <ion-content class="center">
 			<!-----start-main---->
@@ -10,11 +10,10 @@
 	 					</div>
 	 				<form>
 	 						<input type="text" class="text" value="Usuario" onfocus="this.value = '';" ng-model="login.usuario" placeholder="Usuario" >
-	 						<input type="password" value="Password" onfocus="this.value = '';"  ng-model="login.clave" placeholder="Password">
+	 						<input type="password" value="Password" onfocus="this.value = '';"  ng-model="login.clave" placeholder="Contraseña">
 	 						<div class="submit">
 	 							<input type="submit"  ng-click="ingresar()" value="Ingresar" >
 	 					</div>
-	 					<p><a href="#">Forgot Password ?</a></p>
 	 				</form>
 	 			</div>
 	 			<!--//End-login-form-->

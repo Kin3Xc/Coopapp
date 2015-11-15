@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 //Conductor
 $app->get('/cConductor',function(){
@@ -12,7 +12,7 @@ $q = <<<OE
                 FROM Conductor as c
         INNER JOIN Eps as e on e.eps_id = c.eps_id
         INNER JOIN Arp as a on a.arp_id = c.arp_id
-        
+
 OE;
 
 $datos = $db->get_results($q);
@@ -24,12 +24,12 @@ echo json_encode($datos);
 
 
  $app->get('/cConductor/:id',function ($con_id) {
-        
+
         global $db;
         $q     = "SELECT * FROM Conductor WHERE con_id = '$con_id'";
         $datos = $db->get_results($q);
         echo json_encode($datos);
-       
+
     });
 
 //Insert Conductor
@@ -38,7 +38,7 @@ echo json_encode($datos);
 $app->post('/iConductor',function (){
 
         global $db;
-    
+
         $con_id         =$_REQUEST['con_id'];
         $con_nombre     =$_REQUEST['con_nombre'];
         $con_direccion  =$_REQUEST['con_direccion'];
@@ -48,7 +48,7 @@ $app->post('/iConductor',function (){
         $con_nlicencia  =$_REQUEST['con_nlicencia'];
         $con_catlicencia=$_REQUEST['con_catlicencia'];
         $arp_id         =$_REQUEST['arp_id'];
-                  
+
         //insertar Conductor
         $q      =   "INSERT INTO `Conductor` (
             `con_id`,
@@ -60,7 +60,7 @@ $app->post('/iConductor',function (){
             `con_nlicencia`,
             `con_catlicencia`,
             `arp_id`
-            ) 
+            )
             VALUES ('$con_id',
              '$con_nombre',
              '$con_direccion',
@@ -71,12 +71,12 @@ $app->post('/iConductor',function (){
              '$con_catlicencia',
              '$arp_id'
              );";
-        
+
         echo $q;
         $datos   =   $db->query($q);
 
         //$db->debug();
- 
+
         $mensaje = array('mensaje'=>'Inserto ok');
 
          echo json_encode($mensaje);
@@ -88,7 +88,7 @@ $app->post('/iConductor',function (){
 
 // DELETE route
 $app->delete('/eConductor',function () {
-        
+
 
         global $db;
 
@@ -102,14 +102,14 @@ $app->delete('/eConductor',function () {
 });
 
 
-//  login conductor 
+//  login conductor
 $app->post('/loginConductor',function (){
     $user  =$_REQUEST['usuario'];
     $pass  =$_REQUEST['password'];
 
     global $db;
         $q     = "SELECT * FROM Conductor WHERE con_id = '$user' AND con_nlicencia = '$pass'";
-        $datos = $db->get_results($q);
+        $datos = $db->get_results($q); 
         if ($datos < 1) {
             $datos = array('mensaje' =>  'Login incorrecto');
         }

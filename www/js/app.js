@@ -18,25 +18,9 @@ angular.module('coopapp', ['ionic','coopapp.controllers'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
+  $ionicConfigProvider.navBar.alignTitle('center');
   $stateProvider
-  .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
-
-  .state('app.home', {
-    url: '/home',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/home.html',
-        controller: 'HomeCtrl'
-      }
-    }
-  })
-
   .state('login',{ //Nombre del estado
     url: '/login', //URL para navegar al estado
     templateUrl: 'templates/login.html', //vista HTML
