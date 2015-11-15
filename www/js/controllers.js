@@ -9,31 +9,32 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 	};
 
 	//Funcion para ingresar, se ejecuta al hacer clic sobre el boton Ingresar
+
 	$scope.ingresar = function(){
 		//Aquí validaria los datos que ingresa el usuario
 		if ($scope.login.usuario != "" && $scope.login.clave != "") {
-		// 	if ($scope.login.usuario === "root") {
-		// 		if ($scope.login.clave === "root") {
-		// 			// alert('Bienvenido al sistema');
-		// 			$location.url("/home");
-		// 		}else{
-		// 			alert('Su clave es incorrecta\nPor favor vuelva a intentarlo');
-		// 			$scope.login.clave = "";
-		// 		}
-		// 	}else{
-		// 		alert('El usuario ingresado no existe\nPor favor vuelva a intentarlo');
-		// 		$scope.login.usuario = "";
-		// 	}
-		// }else{
-		// 	alert('Existen campos vacios, por favor verifique\nIngrese todos los datos.');
-		// }
+			// 	if ($scope.login.usuario === "root") {
+			// 		if ($scope.login.clave === "root") {
+			// 			// alert('Bienvenido al sistema');
+			// 			$location.url("/home");
+			// 		}else{
+			// 			alert('Su clave es incorrecta\nPor favor vuelva a intentarlo');
+			// 			$scope.login.clave = "";
+			// 		}
+			// 	}else{
+			// 		alert('El usuario ingresado no existe\nPor favor vuelva a intentarlo');
+			// 		$scope.login.usuario = "";
+			// 	}
+			// }else{
+			// 	alert('Existen campos vacios, por favor verifique\nIngrese todos los datos.');
+			// }
 
-		var login = {
-			usuario: $scope.login.usuario,
-			password: $scope.login.clave
-		};
+			var login = {
+				usuario: $scope.login.usuario,
+				password: $scope.login.clave
+			};
 
-		$http.post('https://ikarotech.com/cooptranslibre2/api/loginConductor', login)
+			$http.post('https://ikarotech.com/cooptranslibre2/api/loginConductor', login)
 			.success(function(data){
 				console.log(data);
 				if (data != null) {
@@ -137,17 +138,13 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 .controller('listAlumCtrl',  function($scope, $http, $ionicHistory, $timeout, $ionicLoading){
 
 	// Setup the loader
-  	$ionicLoading.show({
-	    content: 'Loading',
-	    animation: 'fade-in',
-	    showBackdrop: true,
-	    maxWidth: 200,
-	    showDelay: 0
-	  });
-
-	$scope.myGoBack = function() {
-		$ionicHistory.goBack();
-	};
+	$ionicLoading.show({
+		content: 'Loading',
+		animation: 'fade-in',
+		showBackdrop: true,
+		maxWidth: 200,
+		showDelay: 0
+	});
 
 
 	// $http.get('http://jsonplaceholder.typicode.com/users')
@@ -165,41 +162,41 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 
 
 	// Set a timeout to clear loader, however you would actually call the $ionicLoading.hide(); method whenever everything is ready or loaded.
-	  $timeout(function () {
+	$timeout(function () {
 
-			$scope.$apply(function(){
-				$scope.alumnos = [
-					{
-						name: 'Pepito Perez',
-						address: 'Calle 1 # 11 - 21',
-						state: 'Activo'
-					},
+		$scope.$apply(function(){
+			$scope.alumnos = [
+				{
+					name: 'Pepito Perez',
+					address: 'Calle 1 # 11 - 21',
+					state: 'Activo'
+				},
 
-					{
-						name: 'Juan Castelanos',
-						address: 'Calle 1 # 11 - 21',
-						state: 'Activo'
-					},
+				{
+					name: 'Juan Castelanos',
+					address: 'Calle 1 # 11 - 21',
+					state: 'Activo'
+				},
 
-					{
-						name: 'Pedro Martinez',
-						address: 'Calle 1 # 11 - 21',
-						state: 'Activo'
-					},
+				{
+					name: 'Pedro Martinez',
+					address: 'Calle 1 # 11 - 21',
+					state: 'Activo'
+				},
 
-					{
-						name: 'Alexander Acosta',
-						address: 'Calle 1 # 11 - 21',
-						state: 'Activo'
-					},
+				{
+					name: 'Alexander Acosta',
+					address: 'Calle 1 # 11 - 21',
+					state: 'Activo'
+				},
 
-					{
-						name: 'Manuel Perez',
-						address: 'Calle 1 # 11 - 21',
-						state: 'Activo'
-					}
-				];
-			});
-			 $ionicLoading.hide();
-	  }, 2000);
+				{
+					name: 'Manuel Perez',
+					address: 'Calle 1 # 11 - 21',
+					state: 'Activo'
+				}
+			];
+		});
+		$ionicLoading.hide();
+	}, 2000);
 });

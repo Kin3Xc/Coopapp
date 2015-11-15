@@ -1,4 +1,12 @@
 {
   "name": "coopapp",
-  "app_id": ""
+  "app_id": "95f648ce",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }
