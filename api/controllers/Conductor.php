@@ -111,7 +111,7 @@ $app->post('/loginConductor',function (){
         $q     = "SELECT * FROM Conductor WHERE con_id = '$user' AND con_nlicencia = '$pass'";
         $datos = $db->get_results($q);
         if ($datos < 1) {
-            $datos = array('mensaje' => , 'Login incorrecto');
+            $datos = array('mensaje' =>  'Login incorrecto');
         }
         echo json_encode($datos);
 });
