@@ -38,7 +38,7 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 				alert(data);
 			})
 			.error(function(err){
-				alert('Error' + err);
+				alert('Error: ' + err);
 			});
 
 

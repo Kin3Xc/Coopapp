@@ -109,7 +109,7 @@ $app->post('/login',function (){
         $q     = "SELECT * FROM Acudiente WHERE acu_id = '$user' AND acu_password = '$pass'";
         $datos = $db->get_results($q);
         if ($datos < 1) {
-            $datos = array('mensaje' => , 'Login incorrecto');
+            $datos = array('mensaje' =>  'Login incorrecto');
         }
         echo json_encode($datos);
 });
