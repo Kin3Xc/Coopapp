@@ -1,5 +1,5 @@
 angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
-.controller('LoginCtrl',function($scope, $location){
+.controller('LoginCtrl',function($scope, $location, $http){
 
 	//Defino el modelo a utilizar, en este caso un sensillo login
 	//con los datos de usuario y clave
@@ -12,23 +12,41 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 	$scope.ingresar = function(){
 		//Aquí validaria los datos que ingresa el usuario
 		if ($scope.login.usuario != "" && $scope.login.clave != "") {
-			if ($scope.login.usuario === "root") {
-				if ($scope.login.clave === "root") {
-					// alert('Bienvenido al sistema');
-					$location.url("/home");
-				}else{
-					alert('Su clave es incorrecta\nPor favor vuelva a intentarlo');
-					$scope.login.clave = "";
-				}
-			}else{
-				alert('El usuario ingresado no existe\nPor favor vuelva a intentarlo');
-				$scope.login.usuario = "";
-			}
-		}else{
-			alert('Existen campos vacios, por favor verifique\nIngrese todos los datos.');
-		}
+		// 	if ($scope.login.usuario === "root") {
+		// 		if ($scope.login.clave === "root") {
+		// 			// alert('Bienvenido al sistema');
+		// 			$location.url("/home");
+		// 		}else{
+		// 			alert('Su clave es incorrecta\nPor favor vuelva a intentarlo');
+		// 			$scope.login.clave = "";
+		// 		}
+		// 	}else{
+		// 		alert('El usuario ingresado no existe\nPor favor vuelva a intentarlo');
+		// 		$scope.login.usuario = "";
+		// 	}
+		// }else{
+		// 	alert('Existen campos vacios, por favor verifique\nIngrese todos los datos.');
+		// }
+
+		var login = {
+			usuario: $scope.login.usuario,
+			password: $scope.login.clave
+		};
+
+		$http.post('https://ikarotech.com/cooptranslibre2/api/loginConductor', login)
+			.success(function(data){
+				alert(data);
+			})
+			.error(function(err){
+				alert('Error' + err);
+			});
+
+
+		};
 	};
 })
+
+
 .controller('HomeCtrl',function($scope,$location,$ionicHistory){
 
 	$scope.verMapa = function(){

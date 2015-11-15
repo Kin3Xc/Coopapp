@@ -103,7 +103,7 @@ $app->delete('/eConductor',function () {
 
 
 //  login conductor 
-$app->post('/login',function (){
+$app->post('/loginConductor',function (){
     $user  =$_REQUEST['usuario'];
     $pass  =$_REQUEST['password'];
 
