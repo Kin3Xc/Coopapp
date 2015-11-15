@@ -5,36 +5,21 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 	//con los datos de usuario y clave
 	$scope.login = {
 		usuario: '',
-		clave: ''
+		password: ''
 	};
 
 	//Funcion para ingresar, se ejecuta al hacer clic sobre el boton Ingresar
 
 	$scope.ingresar = function(){
 		//Aquí validaria los datos que ingresa el usuario
-		if ($scope.login.usuario != "" && $scope.login.clave != "") {
-			// 	if ($scope.login.usuario === "root") {
-			// 		if ($scope.login.clave === "root") {
-			// 			// alert('Bienvenido al sistema');
-			// 			$location.url("/home");
-			// 		}else{
-			// 			alert('Su clave es incorrecta\nPor favor vuelva a intentarlo');
-			// 			$scope.login.clave = "";
-			// 		}
-			// 	}else{
-			// 		alert('El usuario ingresado no existe\nPor favor vuelva a intentarlo');
-			// 		$scope.login.usuario = "";
-			// 	}
-			// }else{
-			// 	alert('Existen campos vacios, por favor verifique\nIngrese todos los datos.');
-			// }
+		if ($scope.login.usuario != "" && $scope.login.password != "") {
+			console.log($scope.login);		
 
-			var login = {
-				usuario: $scope.login.usuario,
-				password: $scope.login.clave
-			};
-
-			$http.post('https://ikarotech.com/cooptranslibre2/api/loginConductor', login)
+			$http({
+				method: 'POST',
+				url: "https://ikarotech.com/cooptranslibre2/api/loginConductor",
+				params: $scope.login
+			})
 			.success(function(data){
 				console.log(data);
 				if (data != null) {
@@ -47,8 +32,7 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 				alert('Error: ' + err);
 			});
 
-
-		};
+		}
 	};
 })
 
