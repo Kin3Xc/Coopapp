@@ -31,6 +31,47 @@ $app->get('/cConductorVehiculo/:id',function ($cve_id) {
        
 });
 
+// NUEVO
+//Consultar Por id de conductor
+$app->get('/cConductorRuta/:id',function ($con_id) {
+
+    global $db;
+
+    $q = "SELECT * FROM ConductorVehiculo WHERE con_id='$con_id'";
+
+    $datos = $db->get_results($q);
+
+    echo json_encode($datos);  
+});
+
+// NUEVO
+//Consultar el ID de la ruta del conductor por id de vehiculo
+$app->get('/cIdRutaConductor/:id',function ($veh_id) {
+
+    global $db;
+
+    $q = "SELECT * FROM vehiculosRuta WHERE idVehiculo='$veh_id'";
+
+    $datos = $db->get_results($q);
+
+    echo json_encode($datos);  
+});
+
+// NUEVO
+//Consultar la ruta del conductor por id de vehiculo
+$app->get('/cRutaConductor/:id',function ($rut_id) {
+
+    global $db;
+
+    $q = "SELECT * FROM Ruta WHERE rut_id='$rut_id'";
+
+    $datos = $db->get_results($q);
+
+    echo json_encode($datos);  
+});
+
+
+
 
 //Insert Conductor Vehiculo
 

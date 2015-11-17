@@ -1,5 +1,5 @@
 <?php
-	
+
 
 	$dateBase = 2; // base de datos seleccionada
 
@@ -26,7 +26,7 @@
 			//CONFIGURACION DB
 			if (!defined('DB_USUARIO')) define('DB_USUARIO', 'ikarotech');//
 			if (!defined('DB_CLAVE')) define('DB_CLAVE', 'cjac23emro2');
-			if (!defined('DB_NOMBRE')) define('DB_NOMBRE', 'ikarotec_ruta2');
+			if (!defined('DB_NOMBRE')) define('DB_NOMBRE', 'ikarotec_rutaapp');
 			if (!defined('DB_HOST')) define('DB_HOST', 'localhost');
 
 			include_once "ez_sql/ez_sql_core.php";
@@ -35,8 +35,8 @@
 			$db = new ezSQL_mysql(DB_USUARIO,DB_CLAVE,DB_NOMBRE,DB_HOST);
 
 		break;
-		
+
 	}
-	
+
 
 ?>

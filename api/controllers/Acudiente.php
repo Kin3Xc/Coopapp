@@ -99,9 +99,9 @@ $app->delete('/eAcudiente',function () {
 
 });
 
-
+// NUEVO
 //  login acudiente 
-$app->post('/login',function (){
+$app->post('/loginAcudiente',function (){
     $user  =$_REQUEST['usuario'];
     $pass  =$_REQUEST['password'];
 
