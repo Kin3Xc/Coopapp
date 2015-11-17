@@ -70,6 +70,21 @@ $app->get('/cRutaConductor/:id',function ($rut_id) {
     echo json_encode($datos);  
 });
 
+// NUEVO
+//Consultar los estudiantes de una ruta
+$app->get('/cRutaConductorAlumnos/:id',function ($rut_id) {
+
+    global $db;
+
+    $q = "SELECT * FROM Ruta WHERE rut_id='$rut_id'";
+
+    $datos = $db->get_results($q);
+
+    echo json_encode($datos);  
+});
+
+
+
 
 
 
