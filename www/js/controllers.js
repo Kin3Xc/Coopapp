@@ -13,7 +13,7 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 	$scope.ingresar = function(){
 		//Aquí validaria los datos que ingresa el usuario
 		if ($scope.login.usuario != "" && $scope.login.password != "") {
-			console.log($scope.login);		
+			console.log($scope.login);
 
 			$http({
 				method: 'POST',
@@ -56,69 +56,33 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 		$ionicHistory.goBack();
 	};
 })
-
-.factory('mapa', function(){
-	service = {};
-
-	service.render = function(lat, long){
-		var point1 = new google.maps.LatLng(4.666331, -74.125977);
-		var point2 = new google.maps.LatLng(4.666277, -74.120199);
-		var point3 = new google.maps.LatLng(4.658499, -74.115711);
-		// set the origin and destination
-		var org = new google.maps.LatLng ( 4.666359, -74.133825);
-		var finalCo = new google.maps.LatLng(4.668102, -74.103561);
-
-		var wps = [{ location: point1 }, { location: point2 }, {location: point3}];
-
-		var location = new google.maps.LatLng(lat, long);
-		var option = {
-			zoom: 14,
-			center: location,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-			// origin: org,
-			// destination: dest,
-			// waypoints: wps,
-			// travelMode: google.maps.DirectionsTravelMode.DRIVING
-		};
-
-		directionsDisplay = new google.maps.DirectionsRenderer();
-
-		map = new google.maps.Map(document.getElementById('map'), option);
-
-		directionsDisplay.setMap(map);
-
-		marker = new google.maps.Marker({
-			map: map,
-			position: location,
-			title: 'Mi ubicación'
-		});
-
-	}
-	return service;
-})
-
 //Controlador para octener la pocision actual del usuario
-.controller('MapaCtrl',function($scope, $cordovaGeolocation, mapa){
-	$scope.titulo = "Pocisión actual";
-	var posOptions = {timeout: 5000, enableHighAccuracy: true};
-	$scope.lat;
-	$scope.long;
-	$cordovaGeolocation
-	.getCurrentPosition(posOptions)
-	.then(function(position) {
-		var lat  = position.coords.latitude
-		var long = position.coords.longitude
+.controller('MapaCtrl',[ '$scope', '$cordovaGeolocation', function($scope, $cordovaGeolocation){
 
-		mapa.render(lat, long);
-
-		$scope.lat = lat;
-		$scope.long = long;
-
-	}, function(err) {
-		// error
-		console.log('Error: ' + err);
-	});
-})
+    $scope.map = {center: {latitude: 4.99663, longitude: -73.6680 }, zoom: 8 };
+    $scope.options = {scrollwheel: true};
+    $scope.markers = []
+    // get position of user and then set the center of the map to that position
+    $cordovaGeolocation.getCurrentPosition().then(function (position) {
+      console.log('getCurrentPosition');
+      var lat  = position.coords.latitude
+      var long = position.coords.longitude
+      console.log(lat);
+      console.log(long);
+      $scope.map = {center: {latitude: lat, longitude: long}, zoom: 16 };
+      //just want to create this loop to make more markers
+      for(var i=0; i<5; i++) {
+        $scope.markers.push({
+          id: $scope.markers.length,
+          latitude: lat + (i * 0.0100),
+          longitude: long + (i * 0.005),
+          title: 'm' + i
+        })
+      }
+    }, function(err) {
+      console.log('Error: ' + err);
+    });
+}])
 //Controlador para octener la pocision actual del usuario
 .controller('listAlumCtrl',  function($scope, $http, $ionicHistory, $timeout, $ionicLoading, localStorageService){
 
