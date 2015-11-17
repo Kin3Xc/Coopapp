@@ -1,8 +1,10 @@
 <ion-view view-title="Mi ruta" left-buttons="leftButtons" right-buttons="rightButtons">
-  <ion-content>
-    	<div style="margin-top:5px; margin:0; text-align:center;" class="list">
-        <div id="map"></div>
-    	</div>
-    
+  <ion-content class="Ruta">
+    <div id="map_canvas">
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+        <ui-gmap-markers models="markers" coords="'self'" icon="'icon'">
+        </ui-gmap-markers>
+      </ui-gmap-google-map>
+    </div>
   </ion-content>
 </ion-view>
