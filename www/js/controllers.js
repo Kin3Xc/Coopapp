@@ -121,6 +121,19 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 					.success(function(data2){
 						console.log(data2);
 						localStorageService.set('idColegio', data2[0].idColegio);
+
+						$http({
+						method: 'GET',
+						url: 'https://ikarotech.com/cooptranslibre2/api/cAlumnosRuta/'+ data2[0].idColegio+'/'+data1[0].idRuta
+						})
+						.success(function(data3){
+							console.log(data3);
+							$ionicLoading.hide();
+						})
+						.error(function(err3){
+							alertalert('Error al consultar los datos ' + err3);	
+						})
+
 					})
 					.error(function(err2){
 						alertalert('Error al consultar los datos ' + err2);
