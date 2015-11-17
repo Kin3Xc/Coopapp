@@ -56,6 +56,9 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 		$ionicHistory.goBack();
 	};
 })
+
+
+
 //Controlador para octener la pocision actual del usuario
 .controller('MapaCtrl',[ '$scope', '$cordovaGeolocation', function($scope, $cordovaGeolocation){
 
@@ -69,6 +72,7 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
       var long = position.coords.longitude
       console.log(lat);
       console.log(long);
+      
       $scope.map = {center: {latitude: lat, longitude: long}, zoom: 16 };
       //just want to create this loop to make more markers
       for(var i=0; i<5; i++) {
@@ -83,6 +87,10 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
       console.log('Error: ' + err);
     });
 }])
+
+
+
+
 //Controlador para octener la pocision actual del usuario
 .controller('listAlumCtrl',  function($scope, $http, $ionicHistory, $timeout, $ionicLoading, localStorageService){
 
@@ -128,6 +136,9 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 						})
 						.success(function(data3){
 							console.log(data3);
+							if (data3 == null) {
+								alert('No hay datos asociados');
+							}
 							$ionicLoading.hide();
 						})
 						.error(function(err3){
