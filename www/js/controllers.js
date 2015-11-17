@@ -1,5 +1,5 @@
-angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
-.controller('LoginCtrl',function($scope, $location, $http){
+angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'])
+.controller('LoginCtrl',function($scope, $location, $http, localStorageService){
 
 	//Defino el modelo a utilizar, en este caso un sensillo login
 	//con los datos de usuario y clave
@@ -21,8 +21,9 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 				params: $scope.login
 			})
 			.success(function(data){
-				console.log(data);
+				console.log(data[0].con_id);
 				if (data != null) {
+					localStorageService.set('con_id', data[0].con_id);
 					$location.url("/home");
 				}else{
 					alert('Error en el inicio de sesión')
@@ -83,7 +84,7 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
     });
 }])
 //Controlador para octener la pocision actual del usuario
-.controller('listAlumCtrl',  function($scope, $http, $ionicHistory, $timeout, $ionicLoading){
+.controller('listAlumCtrl',  function($scope, $http, $ionicHistory, $timeout, $ionicLoading, localStorageService){
 
 	// Setup the loader
 	$ionicLoading.show({
@@ -93,41 +94,100 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova'])
 		maxWidth: 200,
 		showDelay: 0
 	});
-	$timeout(function () {
 
-		$scope.$apply(function(){
-			$scope.alumnos = [
-				{
-					name: 'Pepito Perez',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				},
+	var con_id = localStorageService.get('con_id');
+	console.log(con_id);
+	// $http.get('https://ikarotech.com/cooptranslibre2/api/cConductorVehiculo/'+ con_id)
+	$http({
+		method: 'GET',
+		url: 'https://ikarotech.com/cooptranslibre2/api/cConductorRuta/'+ con_id
+		})
+		.success(function(data){
+			console.log(data);
+			localStorageService.set('veh_id', data[0].veh_id);
 
-				{
-					name: 'Juan Castelanos',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				},
+			$http({
+				method: 'GET',
+				url: 'https://ikarotech.com/cooptranslibre2/api/cIdRutaConductor/'+ data[0].veh_id
+				})
+				.success(function(data1){
+					console.log(data1);
+					localStorageService.set('idRuta', data1[0].idRuta);
 
-				{
-					name: 'Pedro Martinez',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				},
+					$http({
+					method: 'GET',
+					url: 'https://ikarotech.com/cooptranslibre2/api/cRutaConductor/'+ data1[0].idRuta
+					})
+					.success(function(data2){
+						console.log(data2);
+						localStorageService.set('idColegio', data2[0].idColegio);
+					})
+					.error(function(err2){
+						alertalert('Error al consultar los datos ' + err2);
+					})
 
-				{
-					name: 'Alexander Acosta',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				},
+				})
+				.error(function(err1){
+					alert('Error al consultar los datos ' + err1);
+				})
 
-				{
-					name: 'Manuel Perez',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				}
-			];
-		});
-		$ionicLoading.hide();
-	}, 2000);
+			// $ionicLoading.hide();
+		})
+		.error(function(err){
+			alert('Error al consultar los datos ' + err);
+		})
+
+
+	// $http.get('http://jsonplaceholder.typicode.com/users')
+	// 	.success(function(data) {
+	// 		$ionicLoading.hide();
+	// 		console.log(data);
+	// 		$scope.alumnos = data;
+	// 	})
+	// 	.error(function(err) {
+	// 		alert("No hay data para mostrar: " + err);
+	// 	});
+
+
+	// $scope.alumnos=[];
+
+
+	// Set a timeout to clear loader, however you would actually call the $ionicLoading.hide(); method whenever everything is ready or loaded.
+	// $timeout(function () {
+
+	// 	$scope.$apply(function(){
+	// 		$scope.alumnos = [
+	// 			{
+	// 				name: 'Pepito Perez',
+	// 				address: 'Calle 1 # 11 - 21',
+	// 				state: 'Activo'
+	// 			},
+
+	// 			{
+	// 				name: 'Juan Castelanos',
+	// 				address: 'Calle 1 # 11 - 21',
+	// 				state: 'Activo'
+	// 			},
+
+	// 			{
+	// 				name: 'Pedro Martinez',
+	// 				address: 'Calle 1 # 11 - 21',
+	// 				state: 'Activo'
+	// 			},
+
+	// 			{
+	// 				name: 'Alexander Acosta',
+	// 				address: 'Calle 1 # 11 - 21',
+	// 				state: 'Activo'
+	// 			},
+
+	// 			{
+	// 				name: 'Manuel Perez',
+	// 				address: 'Calle 1 # 11 - 21',
+	// 				state: 'Activo'
+	// 			}
+	// 		];
+	// 	});
+	// 	$ionicLoading.hide();
+	// }, 2000);
 });
