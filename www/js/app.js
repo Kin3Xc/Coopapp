@@ -28,7 +28,7 @@ angular.module('coopapp', ['ionic', 'coopapp.controllers', 'uiGmapgoogle-maps', 
     sensor: 'true',
   })
   $stateProvider
-  
+
   .state('login',{ //Nombre del estado
     url: '/login', //URL para navegar al estado
     templateUrl: 'templates/login.html', //vista HTML

@@ -62,30 +62,31 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 //Controlador para octener la pocision actual del usuario
 .controller('MapaCtrl',[ '$scope', '$cordovaGeolocation', function($scope, $cordovaGeolocation){
 
-    $scope.map = {center: {latitude: 4.99663, longitude: -73.6680 }, zoom: 8 };
-    $scope.options = {scrollwheel: true};
-    $scope.markers = []
-    // get position of user and then set the center of the map to that position
-    $cordovaGeolocation.getCurrentPosition().then(function (position) {
-      console.log('getCurrentPosition');
-      var lat  = position.coords.latitude
-      var long = position.coords.longitude
-      console.log(lat);
-      console.log(long);
-      
-      $scope.map = {center: {latitude: lat, longitude: long}, zoom: 16 };
-      //just want to create this loop to make more markers
-      for(var i=0; i<5; i++) {
-        $scope.markers.push({
-          id: $scope.markers.length,
-          latitude: lat + (i * 0.0100),
-          longitude: long + (i * 0.005),
-          title: 'm' + i
-        })
-      }
-    }, function(err) {
-      console.log('Error: ' + err);
-    });
+	$scope.map = {center: {latitude: 4.99663, longitude: -73.6680 }, zoom: 8 };
+	$scope.options = {scrollwheel: true};
+	$scope.markers = []
+	// get position of user and then set the center of the map to that position
+	//  $cordovaGeolocation.getCurrentPosition().then(function (position) {
+		navigator.geolocation.watchPosition(function(position) {
+		console.log('getCurrentPosition');
+		var lat  = position.coords.latitude
+		var long = position.coords.longitude
+		console.log(lat);
+		console.log(long);
+
+		$scope.map = {center: {latitude: lat, longitude: long}, zoom: 16 };
+		//just want to create this loop to make more markers
+		for(var i=0; i<5; i++) {
+			$scope.markers.push({
+				id: $scope.markers.length,
+				latitude: lat + (i * 0.0100),
+				longitude: long + (i * 0.005),
+				title: 'm' + i
+			})
+		}
+	}, function(err) {
+		console.log('Error: ' + err);
+	});
 }])
 
 
@@ -93,6 +94,7 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 
 //Controlador para octener la pocision actual del usuario
 .controller('listAlumCtrl',  function($scope, $http, $ionicHistory, $timeout, $ionicLoading, localStorageService){
+	$scope.alumnos=[];
 
 	// Setup the loader
 	$ionicLoading.show({
@@ -136,8 +138,10 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 						})
 						.success(function(data3){
 							console.log(data3);
+							$scope.alumnos = data3;
 							if (data3 == null) {
 								alert('No hay datos asociados');
+								$ionicLoading.hide();
 							}
 							$ionicLoading.hide();
 						})
@@ -165,57 +169,4 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 			$ionicLoading.hide();
 		})
 
-
-	// $http.get('http://jsonplaceholder.typicode.com/users')
-	// 	.success(function(data) {
-	// 		$ionicLoading.hide();
-	// 		console.log(data);
-	// 		$scope.alumnos = data;
-	// 	})
-	// 	.error(function(err) {
-	// 		alert("No hay data para mostrar: " + err);
-	// 	});
-
-
-	// $scope.alumnos=[];
-
-
-	// Set a timeout to clear loader, however you would actually call the $ionicLoading.hide(); method whenever everything is ready or loaded.
-	// $timeout(function () {
-
-	// 	$scope.$apply(function(){
-	// 		$scope.alumnos = [
-	// 			{
-	// 				name: 'Pepito Perez',
-	// 				address: 'Calle 1 # 11 - 21',
-	// 				state: 'Activo'
-	// 			},
-
-	// 			{
-	// 				name: 'Juan Castelanos',
-	// 				address: 'Calle 1 # 11 - 21',
-	// 				state: 'Activo'
-	// 			},
-
-	// 			{
-	// 				name: 'Pedro Martinez',
-	// 				address: 'Calle 1 # 11 - 21',
-	// 				state: 'Activo'
-	// 			},
-
-	// 			{
-	// 				name: 'Alexander Acosta',
-	// 				address: 'Calle 1 # 11 - 21',
-	// 				state: 'Activo'
-	// 			},
-
-	// 			{
-	// 				name: 'Manuel Perez',
-	// 				address: 'Calle 1 # 11 - 21',
-	// 				state: 'Activo'
-	// 			}
-	// 		];
-	// 	});
-	// 	$ionicLoading.hide();
-	// }, 2000);
 });
