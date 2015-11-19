@@ -94,124 +94,79 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 
 //Controlador para octener la pocision actual del usuario
 .controller('listAlumCtrl',  function($scope, $http, $ionicHistory, $timeout, $ionicLoading, localStorageService){
-
-	// // Setup the loader
-	// $ionicLoading.show({
-	// 	content: 'Loading',
-	// 	animation: 'fade-in',
-	// 	showBackdrop: true,
-	// 	maxWidth: 200,
-	// 	showDelay: 0
-	// });
-
-	// var con_id = localStorageService.get('con_id');
-	// console.log(con_id);
-	// // $http.get('https://ikarotech.com/cooptranslibre2/api/cConductorVehiculo/'+ con_id)
-	// $http({
-	// 	method: 'GET',
-	// 	url: 'https://ikarotech.com/cooptranslibre2/api/cConductorRuta/'+ con_id
-	// 	})
-	// 	.success(function(data){
-	// 		console.log(data);
-	// 		localStorageService.set('veh_id', data[0].veh_id);
-	//
-	// 		$http({
-	// 			method: 'GET',
-	// 			url: 'https://ikarotech.com/cooptranslibre2/api/cIdRutaConductor/'+ data[0].veh_id
-	// 			})
-	// 			.success(function(data1){
-	// 				console.log(data1);
-	// 				localStorageService.set('idRuta', data1[0].idRuta);
-	//
-	// 				$http({
-	// 				method: 'GET',
-	// 				url: 'https://ikarotech.com/cooptranslibre2/api/cRutaConductor/'+ data1[0].idRuta
-	// 				})
-	// 				.success(function(data2){
-	// 					console.log(data2);
-	// 					localStorageService.set('idColegio', data2[0].idColegio);
-	//
-	// 					$http({
-	// 					method: 'GET',
-	// 					url: 'https://ikarotech.com/cooptranslibre2/api/cAlumnosRuta/'+ data2[0].idColegio+'/'+data1[0].idRuta
-	// 					})
-	// 					.success(function(data3){
-	// 						console.log(data3);
-	// 						if (data3 == null) {
-	// 							alert('No hay datos asociados');
-	// 						}
-	// 						$ionicLoading.hide();
-	// 					})
-	// 					.error(function(err3){
-	// 						alertalert('Error al consultar los datos ' + err3);
-	// 					})
-	//
-	// 				})
-	// 				.error(function(err2){
-	// 					alertalert('Error al consultar los datos ' + err2);
-	// 				})
-	//
-	// 			})
-	// 			.error(function(err1){
-	// 				alert('Error al consultar los datos ' + err1);
-	// 			})
-	//
-	// 		// $ionicLoading.hide();
-	// 	})
-	// 	.error(function(err){
-	// 		alert('Error al consultar los datos ' + err);
-	// 	})
-	//
-	//
-	// // $http.get('http://jsonplaceholder.typicode.com/users')
-	// // 	.success(function(data) {
-	// // 		$ionicLoading.hide();
-	// // 		console.log(data);
-	// // 		$scope.alumnos = data;
-	// // 	})
-	// // 	.error(function(err) {
-	// // 		alert("No hay data para mostrar: " + err);
-	// // 	});
-
-
 	$scope.alumnos=[];
 
-	//Set a timeout to clear loader, however you would actually call the $ionicLoading.hide(); method whenever everything is ready or loaded.
-	$timeout(function () {
+	// Setup the loader
+	$ionicLoading.show({
+		content: 'Loading',
+		animation: 'fade-in',
+		showBackdrop: true,
+		maxWidth: 200,
+		showDelay: 0
+	});
 
-		$scope.$apply(function(){
-			$scope.alumnos = [
-				{
-					name: 'Pepito Perez',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				},
+	var con_id = localStorageService.get('con_id');
+	console.log(con_id);
+	// $http.get('https://ikarotech.com/cooptranslibre2/api/cConductorVehiculo/'+ con_id)
+	$http({
+		method: 'GET',
+		url: 'https://ikarotech.com/cooptranslibre2/api/cConductorRuta/'+ con_id
+		})
+		.success(function(data){
+			console.log(data);
+			localStorageService.set('veh_id', data[0].veh_id);
 
-				{
-					name: 'Juan Castelanos',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				},
+			$http({
+				method: 'GET',
+				url: 'https://ikarotech.com/cooptranslibre2/api/cIdRutaConductor/'+ data[0].veh_id
+				})
+				.success(function(data1){
+					console.log(data1);
+					localStorageService.set('idRuta', data1[0].idRuta);
 
-				{
-					name: 'Pedro Martinez',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				},
+					$http({
+					method: 'GET',
+					url: 'https://ikarotech.com/cooptranslibre2/api/cRutaConductor/'+ data1[0].idRuta
+					})
+					.success(function(data2){
+						console.log(data2);
+						localStorageService.set('idColegio', data2[0].idColegio);
 
-				{
-					name: 'Alexander Acosta',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				},
+						$http({
+						method: 'GET',
+						url: 'https://ikarotech.com/cooptranslibre2/api/cAlumnosRuta/'+ data2[0].idColegio+'/'+data1[0].idRuta
+						})
+						.success(function(data3){
+							console.log(data3);
+							$scope.alumnos = data3;
+							if (data3 == null) {
+								alert('No hay datos asociados');
+								$ionicLoading.hide();
+							}
+							$ionicLoading.hide();
+						})
+						.error(function(err3){
+							alertalert('Error al consultar los datos ' + err3);	
+							$ionicLoading.hide();
+						})
 
-				{
-					name: 'Manuel Perez',
-					address: 'Calle 1 # 11 - 21',
-					state: 'Activo'
-				}
-			];
-		});
-		$ionicLoading.hide();
-	}, 2000);
+					})
+					.error(function(err2){
+						alertalert('Error al consultar los datos ' + err2);
+						$ionicLoading.hide();
+					})
+
+				})
+				.error(function(err1){
+					alert('Error al consultar los datos ' + err1);
+					$ionicLoading.hide();
+				})
+
+			// $ionicLoading.hide();
+		})
+		.error(function(err){
+			alert('Error al consultar los datos ' + err);
+			$ionicLoading.hide();
+		})
+
 });
