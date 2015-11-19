@@ -143,22 +143,26 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 						})
 						.error(function(err3){
 							alertalert('Error al consultar los datos ' + err3);	
+							$ionicLoading.hide();
 						})
 
 					})
 					.error(function(err2){
 						alertalert('Error al consultar los datos ' + err2);
+						$ionicLoading.hide();
 					})
 
 				})
 				.error(function(err1){
 					alert('Error al consultar los datos ' + err1);
+					$ionicLoading.hide();
 				})
 
 			// $ionicLoading.hide();
 		})
 		.error(function(err){
 			alert('Error al consultar los datos ' + err);
+			$ionicLoading.hide();
 		})
 
 
