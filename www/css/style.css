@@ -95,6 +95,13 @@ h1 {
 	color: #FFFFFF !important;
 }
 
+/**/
+.button-balanced.center{
+	margin: 0 auto;
+	display: block;
+	background: rgb(8, 91, 29);
+	color: #FFFFFF;
+}
 
 /* Empty. Add your own CSS if you like */
 .Login{

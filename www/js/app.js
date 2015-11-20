@@ -54,13 +54,14 @@ angular.module('coopapp', ['ionic', 'coopapp.controllers', 'uiGmapgoogle-maps', 
 
   .state('estadoRuta', {
     url: '/estadoRuta',
-    templateUrl: 'templates/estadoRuta.html'
+    templateUrl: 'templates/estadoRuta.html',
+    controller: 'estadoRutaCtrl'
   })
 
   .state('resumenRuta', {
     url: '/resumenRuta',
-    templateUrl: 'templates/resumenRuta.html',
-    controller: 'estadoRutaCtrl'
+    templateUrl: 'templates/resumenRuta.html'
+
   })
 
   .state('listaAlumnos', {

@@ -52,9 +52,6 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 	$scope.verEstadoRuta = function(){
 		$location.url('/estadoRuta');
 	};
-	$scope.myGoBack = function() {
-		$ionicHistory.goBack();
-	};
 })
 
 
@@ -146,7 +143,7 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 							$ionicLoading.hide();
 						})
 						.error(function(err3){
-							alertalert('Error al consultar los datos ' + err3);	
+							alertalert('Error al consultar los datos ' + err3);
 							$ionicLoading.hide();
 						})
 
@@ -207,8 +204,11 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 })
 
 
-.controller('estadoRutaCtrl', function($scope, $ionicPopup){
-	
+.controller('estadoRutaCtrl', function($scope, $ionicPopup , $location){
+	$scope.verResumenRuta = function(){
+		$location.url('/resumenRuta');
+	};
+
 	// A confirm dialog
 	$scope.showConfirm = function() {
 	   var confirmPopup = $ionicPopup.confirm({

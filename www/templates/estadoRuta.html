@@ -1,32 +1,45 @@
-<!-- <ion-view view-title="Estado Ruta" left-buttons="leftButtons" right-buttons="rightButtons"> -->
-<ion-view view-title="Estado Ruta">
+<!-- <ion-view view-title="Estados Ruta" left-buttons="leftButtons" right-buttons="rightButtons"> -->
+<ion-view view-title="Ruta" left-buttons="leftButtons" right-buttons="rightButtons">
+<ion-content ng-init="getAlumnos()">
+	<ion-list>
+		<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+			<div>
+				<h2>Ruta #41</h2>
+				<p>Origen: BANDERAS</p>
+				<p>Destino: CASTILLA</p>
+			</div>
+		</ion-item>
+		<div class="list card">
+			<a href="#"  ng-click="showConfirm()" class="item item-icon-left">
+				<i class="icon ion-ios-navigate-outline"></i>
+				Recogida
+			</a>
+			<a href="#"  ng-click="showConfirm()" class="item item-icon-left">
+				<i class="icon ion-ios-location-outline"></i>
+				Llegada
+			</a>
 
-  <ion-content ng-init="getAlumnos()">
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/resumenRuta">
+			<a href="#"  ng-click="showConfirm()" class="item item-icon-left">
+				<i class="icon ion-wifi"></i>
+				Trancon
+			</a>
 
-      <img ng-src="img/bus.png">
-        <h2>Ruta #1</h2>
-        <p>Calle 1 a Calle 20</p>
-        <p>Estado: <span class="estado">Finalizado</span></p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </ion-item>
+			<a href="#"  ng-click="showConfirm()" class="item item-icon-left">
+				<i class="icon ion-ios-crop"></i>
+				Problemas mecanicos
+			</a>
 
-      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/resumenRuta">
-        <img ng-src="img/bus.png">
-        <h2>Ruta #2</h2>
-        <p>Calle 1 a Calle 20</p>
-        <p>Estado: LLegada en 20 minutos</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </ion-item>
+			<a href="#"  ng-click="showConfirm()" class="item item-icon-left">
+				<i class="icon ion-ios-person-outline"></i>
+				Policia de transito
+			</a>
 
-      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/resumenRuta">
-        <img ng-src="img/bus.png">
-        <h2>Ruta #3</h2>
-        <p>Calle 1 a Calle 20</p>
-        <p>Estado: LLegada en 10 minutos</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+			<a href="#"  ng-click="estado_adicional()" class="item item-icon-left">
+				<i class="icon ion-ios-redo-outline"></i>
+				Otro
+			</a>
+		</div>
+	</ion-list>
+	<button class="button button-balanced center" ng-click="verResumenRuta()">Ver Historial Notificaiones</button>
+</ion-content>
 </ion-view>
