@@ -256,4 +256,12 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 	    myPopup.close();
 	  });
 	 };
+})
+
+
+.controller('perfilAlumnoCtrl', function($scope, $stateParams){
+
+	var id = $stateParams.id;
+	$scope.alu_id = id;
+
 });

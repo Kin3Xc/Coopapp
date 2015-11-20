@@ -8,7 +8,7 @@
 </ion-header-bar> -->
 <ion-content>
   <ion-list>
-    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="alumno in alumnos" type="item-text-wrap" href="">
+    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="alumno in alumnos" type="item-text-wrap" href="#/perfilAlumno/{{alumno.alu_id}}">
       <img ng-src="img/user.png">
       <h2>{{alumno.alu_nombre}}</h2>
       <!-- <p>{{alumno.address}}</p> -->

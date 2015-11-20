@@ -68,6 +68,13 @@ angular.module('coopapp', ['ionic', 'coopapp.controllers', 'uiGmapgoogle-maps', 
     url: '/listaalumnos',
     templateUrl: 'templates/listaAlumnos.html',
     controller: 'listAlumCtrl'
+  })
+
+   .state('perfilAlumno', {
+    url: '/perfilAlumno/:id',
+    templateUrl: 'templates/perfil.html',
+    controller: 'perfilAlumnoCtrl'
+
   });
 
   // Mostrar la vista de login por default
