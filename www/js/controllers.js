@@ -169,4 +169,91 @@ angular.module('coopapp.controllers', ['ionic', 'ngCordova','LocalStorageModule'
 			$ionicLoading.hide();
 		})
 
+})
+
+.controller('notificationCtrl', function($scope,  $ionicPopup){
+
+	// Triggered on a button click, or some other target
+	$scope.send_notify = function() {
+	  $scope.data = {}
+
+	  // An elaborate, custom popup
+	  var myPopup = $ionicPopup.show({
+	    template: '<input type="text" ng-model="data.msg">',
+	    title: 'Envío de notificación',
+	    subTitle: 'Puede ingresar un mensaje opcional',
+	    scope: $scope,
+	    buttons: [
+	      { text: 'Cancelar' },
+	      {
+	        text: '<b>Envíar</b>',
+	        type: 'button-positive',
+	        onTap: function(e) {
+	          if (!$scope.data.msg) {
+	            e.preventDefault();
+	          } else {
+	            return $scope.data.msg;
+	          }
+	        }
+	      }
+	    ]
+	  });
+	  myPopup.then(function(res) {
+	    console.log('Mensaje', res);
+	    myPopup.close();
+	  });
+	 };
+
+})
+
+
+.controller('estadoRutaCtrl', function($scope, $ionicPopup){
+	
+	// A confirm dialog
+	$scope.showConfirm = function() {
+	   var confirmPopup = $ionicPopup.confirm({
+	     title: 'Envíar estado',
+	     template: 'Realmente desea envíar este estado?'
+	   });
+	   confirmPopup.then(function(res) {
+	     if(res) {
+	       console.log('Dijo si');
+	     } else {
+	       console.log('Dijo no');
+	     }
+	   });
+	 };
+
+	 // Triggered on a button click, or some other target
+	$scope.estado_adicional = function() {
+	  $scope.data = {}
+
+	  // An elaborate, custom popup
+	  var myPopup = $ionicPopup.show({
+	    template: '<input type="password" ng-model="data.estado">',
+	    title: 'Nuevo estado',
+	    subTitle: 'Por favor ingrese la desripción de su estado',
+	    scope: $scope,
+	    buttons: [
+	      { text: 'Cancelar' },
+	      {
+	        text: '<b>Envíar</b>',
+	        type: 'button-positive',
+	        onTap: function(e) {
+	          if (!$scope.data.estado) {
+	            //don't allow the user to close unless he enters wifi password
+	            e.preventDefault();
+	          } else {
+	            return $scope.data.estado;
+	          }
+	        }
+	      }
+	    ]
+	  });
+
+	  myPopup.then(function(res) {
+	    console.log('Mensaje', res);
+	    myPopup.close();
+	  });
+	 };
 });

@@ -4,16 +4,23 @@
     <button class="button icon ion-navicon" ng-click="myGoBack()"></button>
     <h1 class="title title-center" >NOtificaciones</h1>
   </ion-header-bar> -->
-  <ion-content ng-init="getAlumnos()">
+  <ion-content ng-init="getAlumnos()" class="notification">
+    <p>Sleccione la notificación que desea envíar</p>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="">
-        <h2>La ruta ha llegado</h2>
-        <p>Por favor salir que la ruta esta cerca de su pocisión</p>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" ng-click="send_notify()" href="">
+        <img ng-src="img/notify.png">
+        <h2>Notificar inicio de ruta</h2>
+        <p>Envía una notificacion indicando que vas a iniciar la ruta actual</p>
+        <!-- <p><span class="estado">{{alumno.Hora}}</span></p> -->
+        <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
 
-      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="">
-        <h2>Inico de clases</h2>
-        <p>Las clases ha iniciado</p>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" ng-click="send_notify()" href="">
+        <img ng-src="img/notify.png">
+        <h2>Notificar ruta finalizada</h2>
+        <p>Envía una notificacion indicando que vas a iniciar la ruta actual</p>
+        <!-- <p><span class="estado">{{alumno.Hora}}</span></p> -->
+        <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
   </ion-content>

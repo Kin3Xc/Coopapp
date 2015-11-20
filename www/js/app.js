@@ -48,7 +48,8 @@ angular.module('coopapp', ['ionic', 'coopapp.controllers', 'uiGmapgoogle-maps', 
 
   .state('notification', {
     url: '/notification',
-    templateUrl: 'templates/notifications.html'
+    templateUrl: 'templates/notifications.html',
+    controller: 'notificationCtrl'
   })
 
   .state('estadoRuta', {
@@ -58,7 +59,8 @@ angular.module('coopapp', ['ionic', 'coopapp.controllers', 'uiGmapgoogle-maps', 
 
   .state('resumenRuta', {
     url: '/resumenRuta',
-    templateUrl: 'templates/resumenRuta.html'
+    templateUrl: 'templates/resumenRuta.html',
+    controller: 'estadoRutaCtrl'
   })
 
   .state('listaAlumnos', {
